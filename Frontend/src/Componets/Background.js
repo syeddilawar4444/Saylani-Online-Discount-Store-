@@ -1,5 +1,5 @@
 import React from 'react'
-import {ImageBackground ,View,SafeAreaView,Platform,StatusBar,StyleSheet}  from "react-native"
+import {ImageBackground ,View,Platform,StatusBar,StyleSheet}  from "react-native"
 import BackImg from "../assets/Background.jpg"
 function Background({children}) {
   return (

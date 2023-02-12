@@ -16,7 +16,7 @@ const login = ()=>{
 
     // <Background>
     <>
-      <View style={{width:"100%",backgroundColor:"white",paddingHorizontal:30,justifyContent:"center"} } >
+      <View style={{width:"100%",backgroundColor:"white",paddingHorizontal:30,justifyContent:"center",height:"100%"} } >
         <Image style={{width:200, height:200,alignSelf:"center"}} source={require("../assets/saylanilogo.jpeg")} />
       <Text style={{marginTop: 50, fontSize : 26,alignSelf:"center",color:"green",fontWeight:"bold"}}>SAYLANI WELFARE</Text>
       <Text  style={{marginTop: 10, fontSize : 20,alignSelf:"center"}}>ONLINE DISCOUNT STORE</Text>

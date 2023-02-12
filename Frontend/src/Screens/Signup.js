@@ -15,6 +15,7 @@ import axios from "axios";
 import InputField from "../Componets/InputField";
 import Btn from "../Componets/Btn";
 import BaseUrl from "../constant/BaseUrl"
+import {signUpFirebase} from "../Config/firebase"
 
 function Signup(props) {
 
@@ -104,6 +105,13 @@ function Signup(props) {
       alert('faild')
     }
   };
+  
+  // const signUpUser = async()=>{
+  //   alert("dilawar")
+  //   const re = await signUpFirebase({userName,email,contact,password})
+  // }
+  
+  
   return (
     <>
       <KeyboardAvoidingView>
