@@ -39,7 +39,7 @@ function Navigation() {
 function AdminTab() {
   return (
 
-      <Tab.Navigator screenOptions={{
+      <Tab.Navigator initialRouteName='AddItem' screenOptions={{
           tabBarShowLabel: false,
           headerShown: false,
           tabBarStyle: {

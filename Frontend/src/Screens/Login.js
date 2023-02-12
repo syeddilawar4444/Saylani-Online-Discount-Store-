@@ -15,74 +15,18 @@ function Login(props) {
   const [password, setPassword] = useState("");
   const [loading,setLoading] = useState(false)
   const [respon ,setRespon] = useState("")
-
   const passwordInputRef = useRef();
 
-  // const loginUser = async() => {
-  //   if (!email || !password) {
-  //     return alert("Please fill the Form");
-  //   }
-  //   try {
-  //     const resp = await axios.post(`${BaseUrl}/user/login`, {
-  //           email: email,
-  //           password: password,
-  //     });
-  //     console.log("res==>",resp.data.message);
-  //     setRespon(resp.data.message)
-
-  //     setLoading(false)
-  //     Alert.alert(
-  //       "Login",
-  //       "Successfully Login",
-  //       [{
-  //         text:"OK",
-  //         onPress:()=>{props.navigation.navigate("Home")}
-  //       }]
-  //     )
-  //     setPassword("")
-  //     setEmail("")
-      
-  //   //  const msg =   alert("registered")
-  //   //  await msg
-  //     // props.navigation.navigate("Login")
-  //     // fetch(`${baseUrl}/user/register`, {
-  //   //   method: "POST",
-  //   //   headers: {
-  //   //     "Content-Type": "application/json",
-  //   //   },
-  //   //   body: JSON.stringify({
-  //   //     fullName: username,
-  //   //     phoneNumber: contact,
-  //   //     email: email,
-  //   //     password: password,
-  //   //   }),
-  //   // })
-  //   //   .then((res) => res.json())
-  //   //   .then((res) => console.log(res));
-  // } catch (error) {
-  //   // alert('error',error);
-  //   console.log("error1",error)
-  //   setLoading(false)
-  //   alert('faild')
-  // }
-
-
-
-
-  // };
-
-  //    const change = (e)=>{
-  // console.log("E",e)
-  //    }
   const loginUser = async() =>{
+    setLoading(true)
     if (!email || !password) {
           return alert("Please fill the Form");
         }
         try{
-
-
           const user = await signInFirebase(email,password)
-          console.log("user",user.user.uid)
+          setLoading(false)
+          setEmail("")
+          setPassword("")
           if("obonMzkurrXisnl106FvdeaQG7G2" === user.user.uid ){
             return Alert.alert(
                    "Login",
@@ -93,9 +37,6 @@ function Login(props) {
                    }]
                  )
           }
-          // if("admin@gmail.com" === email && "admin123" === password){
-          //  
-          // }
           Alert.alert(
             "Login",
             "Successfully Login",
@@ -105,7 +46,8 @@ function Login(props) {
             }]
           )
         }catch(e){
-          alert("Error")
+          setLoading(false)
+          alert("Faild")
         }
 
   }

@@ -1,10 +1,12 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import NavbarAdmin from '../Componets/NavAdmin'
 
 const AdminHome = () => {
     return (
         <View>
-            <Text>AdminHome</Text>
+            <NavbarAdmin />
+            <Text>Welcome to Home</Text>
         </View>
     )
 }

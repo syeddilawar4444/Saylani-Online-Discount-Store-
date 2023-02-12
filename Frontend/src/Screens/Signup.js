@@ -6,7 +6,7 @@ import {
   TextInput,
   StatusBar,
   KeyboardAvoidingView,
-  Platform,Alert,
+  Platform, Alert,
   ActivityIndicator
 } from "react-native";
 import axios from "axios";
@@ -15,7 +15,7 @@ import axios from "axios";
 import InputField from "../Componets/InputField";
 import Btn from "../Componets/Btn";
 import BaseUrl from "../constant/BaseUrl"
-import {signUpFirebase} from "../Config/firebase"
+import { signUpFirebase } from "../Config/firebase"
 
 function Signup(props) {
 
@@ -30,113 +30,68 @@ function Signup(props) {
   const [password, setPassword] = useState("");
   const [cPassword, setConPassword] = useState("");
 
-  const [loading,setLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
 
-  // const signUpUser = async () => {
-  //   setLoading(true)
-  //   if (!email || !username || !contact || !password || !cPassword) {
-  //     setLoading(false)
-  //     return alert("Please Fill The Form");
-  //   }
-  //   // debugger
-  //   if (isNaN(contact)) {
-  //     setLoading(false)
-  //     return alert("Correct Number");
-  //   }
+  const signUpUser = async () => {
+    setLoading(true)
+    if (!email || !username || !contact || !password || !cPassword) {
+      setLoading(false)
+      return alert("Please Fill The Form");
+    }
+    if (isNaN(contact)) {
+      setLoading(false)
+      return alert("InCorrect Number");
+    }
 
-  //   if (!(password === cPassword)) {
-  //     setLoading(false)
-  //     return alert("Password Not Match");
-  //   }
+    if (!(password === cPassword)) {
+      setLoading(false)
+      return alert("Password Not Match");
+    }
 
-  //   if (contact.length < 11) {
-  //     setLoading(false)
-  //     return alert("Mobile Number invalid");
-  //   }
-  //   if (email.length < 12) {
-  //     setLoading(false)
-  //     return alert("Email Short");
-  //   }
-   
-
-  //   try {
-  //       const resp = await axios.post(`${BaseUrl}/user/register`, {
-  //             fullName: username,
-  //             phoneNumber: contact,
-  //             email: email,
-  //             password: password,
-  //       });
-  //       console.log("res==>",resp.data);
-  //       setLoading(false)
-  //       Alert.alert(
-  //         "SignUp",
-  //         "Successfully Registered",
-  //         [{
-  //           text:"OK",
-  //           onPress:()=>{props.navigation.navigate("Login")}
-  //         }]
-  //       )
-  //       setUsername("")
-  //       setPassword("")
-  //       setEmail("")
-  //       setContact("")
-  //       setConPassword("")
-  //     //  const msg =   alert("registered")
-  //     //  await msg
-  //       // props.navigation.navigate("Login")
-  //       // fetch(`${baseUrl}/user/register`, {
-  //     //   method: "POST",
-  //     //   headers: {
-  //     //     "Content-Type": "application/json",
-  //     //   },
-  //     //   body: JSON.stringify({
-  //     //     fullName: username,
-  //     //     phoneNumber: contact,
-  //     //     email: email,
-  //     //     password: password,
-  //     //   }),
-  //     // })
-  //     //   .then((res) => res.json())
-  //     //   .then((res) => console.log(res));
-  //   } catch (error) {
-  //     // alert('error',error);
-  //     console.log("error1",error)
-  //     setLoading(false)
-  //     alert('faild')
-  //   }
-  // };
-  
-  const signUpUser = async ()=>{
-
-    try{
-      const re = await signUpFirebase({username,email,contact,password})
+    if (contact.length < 11) {
+      setLoading(false)
+      return alert("Mobile Number invalid");
+    }
+    if (email.length < 12) {
+      setLoading(false)
+      return alert("Email Short");
+    }
+    try {
+      const re = await signUpFirebase({ username, email, contact, password })
+      setLoading(false)
+      setUsername("")
+      setPassword("")
+      setEmail("")
+      setContact("")
+      setConPassword("")
       Alert.alert(
-                 "SignUp",
-                 "Successfully Registered",
-                 [{
-                  text:"OK",
-                 onPress:()=>{props.navigation.navigate("Login")}
-                 }]
-               )
+        "SignUp",
+        "Successfully Registered",
+        [{
+          text: "OK",
+          onPress: () => { props.navigation.navigate("Login") }
+        }]
+      )
 
-    }catch(e){
+    } catch (e) {
+      setLoading(false)
       switch (e.message) {
         case "Firebase: Password should be at least 6 characters (auth/weak-password).":
           alert("Password at least 6")
-        break;
+          break;
         case "Firebase: Error (auth/invalid-email).":
-        alert("invalid-email")
-        break;
+          alert("invalid-email")
+          break;
         case "Firebase: Error (auth/email-already-in-use).":
-        alert("user already exist")          
-        break;
+          alert("user already exist")
+          break;
         default:
-        alert("Unknown Error Occured")
+          alert("Unknown Error Occured")
+      }
     }
   }
-}
-  
-  
+
+
   return (
     <>
       <KeyboardAvoidingView>
@@ -173,7 +128,7 @@ function Signup(props) {
               height: "100%",
             }}
           >
-             <Text style={{ fontSize: 30, color: "#054516" }}>SAYLANI WELFAER</Text>
+            <Text style={{ fontSize: 30, color: "#054516" }}>SAYLANI WELFAER</Text>
             <Text>ONLINE DISCOUNT STORE</Text>
             <TextInput
               autoFocus
@@ -287,14 +242,14 @@ function Signup(props) {
                               </View> */}
             {/* loginButton */}
 
-            { loading ? <ActivityIndicator style={{alignSelf:"center",marginTop:10}} size={"large"}  color="#0000ff"/>
-            :<Btn
-              bgColor="green"
-              textColor="white"
-              btnLable="SignUp"
-              press={signUpUser}
-            />
-}
+            {loading ? <ActivityIndicator style={{ alignSelf: "center", marginTop: 10 }} size={"large"} color="#0000ff" />
+              : <Btn
+                bgColor="green"
+                textColor="white"
+                btnLable="SignUp"
+                press={signUpUser}
+              />
+            }
 
 
             {/* Don't have an account */}
