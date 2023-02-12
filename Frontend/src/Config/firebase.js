@@ -67,4 +67,11 @@ function addUserToDb(userInfo, uid) {
   return setDoc(doc(db, "users", uid), { username, email, contact});
 }
 
-export {signUpFirebase}
+async function signInFirebase(email,password){
+  const user = await signInWithEmailAndPassword(auth,email,password)
+  // console.log("user",user)
+  return user
+  // alert("Login Successfully")
+}
+
+export {signUpFirebase,signInFirebase}

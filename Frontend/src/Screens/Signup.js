@@ -107,12 +107,18 @@ function Signup(props) {
   // };
   
   const signUpUser = async ()=>{
-    debugger
 
     try{
       const re = await signUpFirebase({username,email,contact,password})
-      alert("Register successfully")
-      alert(re)
+      Alert.alert(
+                 "SignUp",
+                 "Successfully Registered",
+                 [{
+                  text:"OK",
+                 onPress:()=>{props.navigation.navigate("Login")}
+                 }]
+               )
+
     }catch(e){
       switch (e.message) {
         case "Firebase: Password should be at least 6 characters (auth/weak-password).":

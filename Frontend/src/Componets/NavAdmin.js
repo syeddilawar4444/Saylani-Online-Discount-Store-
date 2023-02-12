@@ -10,7 +10,7 @@ const NavbarAdmin = () => {
                     <Ionicons name='person-circle' size={75} color={'#61B846'} />
                 </TouchableOpacity>
                 <View>
-                    <Text style={{ fontSize: 24, fontWeight: '700' }}>Mr.Waris</Text>
+                    <Text style={{ fontSize: 24, fontWeight: '700' }}>Syed Dilawar Hussain</Text>
                     <Text style={{ fontSize: 18, fontWeight: '700' }}>Admin</Text>
                 </View>
             </View>
