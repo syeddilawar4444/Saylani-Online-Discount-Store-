@@ -12,9 +12,6 @@ const login = ()=>{
 }
 
   return (
-  //  <Text> dilawar</Text>
-
-    // <Background>
     <>
       <View style={{width:"100%",backgroundColor:"white",paddingHorizontal:30,justifyContent:"center",height:"100%"} } >
         <Image style={{width:200, height:200,alignSelf:"center"}} source={require("../assets/saylanilogo.jpeg")} />
@@ -27,7 +24,6 @@ const login = ()=>{
       </View>
       </View>
     </>
-    // </Background>
   )
 }
 // const styles = StyleSheet.create({

@@ -7,6 +7,19 @@ import {
   onAuthStateChanged,
   signOut,
 } from "firebase/auth";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  setDoc,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  where,
+  onSnapshot,
+  orderBy,
+} from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -24,6 +37,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 console.log("application",app)
 const auth = getAuth(app)
+const db = getFirestore(app)
 
 
 
@@ -38,10 +52,19 @@ async function signUpFirebase(userInfo) {
     password
   );
 
+  
+  await addUserToDb(userInfo, userCredential.user.uid)
+
   console.log("user==>",userCredential)
   console.log("userID ===", userCredential.user.uid);
   //=================call the function to make the blew
 //   await addUserToDb(userInfo, userCredential.user.uid, imageurl);
+}
+
+function addUserToDb(userInfo, uid) {
+  const { username, email,contact } = userInfo;
+  //call the firebase built in function to import the line No #4
+  return setDoc(doc(db, "users", uid), { username, email, contact});
 }
 
 export {signUpFirebase}

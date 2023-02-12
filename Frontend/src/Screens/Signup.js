@@ -32,84 +32,103 @@ function Signup(props) {
 
   const [loading,setLoading] = useState(false)
 
-  const signUpUser = async () => {
-    setLoading(true)
-    if (!email || !username || !contact || !password || !cPassword) {
-      setLoading(false)
-      return alert("Please Fill The Form");
-    }
-    // debugger
-    if (isNaN(contact)) {
-      setLoading(false)
-      return alert("Correct Number");
-    }
+  // const signUpUser = async () => {
+  //   setLoading(true)
+  //   if (!email || !username || !contact || !password || !cPassword) {
+  //     setLoading(false)
+  //     return alert("Please Fill The Form");
+  //   }
+  //   // debugger
+  //   if (isNaN(contact)) {
+  //     setLoading(false)
+  //     return alert("Correct Number");
+  //   }
 
-    if (!(password === cPassword)) {
-      setLoading(false)
-      return alert("Password Not Match");
-    }
+  //   if (!(password === cPassword)) {
+  //     setLoading(false)
+  //     return alert("Password Not Match");
+  //   }
 
-    if (contact.length < 11) {
-      setLoading(false)
-      return alert("Mobile Number invalid");
-    }
-    if (email.length < 12) {
-      setLoading(false)
-      return alert("Email Short");
-    }
+  //   if (contact.length < 11) {
+  //     setLoading(false)
+  //     return alert("Mobile Number invalid");
+  //   }
+  //   if (email.length < 12) {
+  //     setLoading(false)
+  //     return alert("Email Short");
+  //   }
    
 
-    try {
-        const resp = await axios.post(`${BaseUrl}/user/register`, {
-              fullName: username,
-              phoneNumber: contact,
-              email: email,
-              password: password,
-        });
-        console.log("res==>",resp.data);
-        setLoading(false)
-        Alert.alert(
-          "SignUp",
-          "Successfully Registered",
-          [{
-            text:"OK",
-            onPress:()=>{props.navigation.navigate("Login")}
-          }]
-        )
-        setUsername("")
-        setPassword("")
-        setEmail("")
-        setContact("")
-        setConPassword("")
-      //  const msg =   alert("registered")
-      //  await msg
-        // props.navigation.navigate("Login")
-        // fetch(`${baseUrl}/user/register`, {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({
-      //     fullName: username,
-      //     phoneNumber: contact,
-      //     email: email,
-      //     password: password,
-      //   }),
-      // })
-      //   .then((res) => res.json())
-      //   .then((res) => console.log(res));
-    } catch (error) {
-      // alert('error',error);
-      console.log("error1",error)
-      setLoading(false)
-      alert('faild')
-    }
-  };
+  //   try {
+  //       const resp = await axios.post(`${BaseUrl}/user/register`, {
+  //             fullName: username,
+  //             phoneNumber: contact,
+  //             email: email,
+  //             password: password,
+  //       });
+  //       console.log("res==>",resp.data);
+  //       setLoading(false)
+  //       Alert.alert(
+  //         "SignUp",
+  //         "Successfully Registered",
+  //         [{
+  //           text:"OK",
+  //           onPress:()=>{props.navigation.navigate("Login")}
+  //         }]
+  //       )
+  //       setUsername("")
+  //       setPassword("")
+  //       setEmail("")
+  //       setContact("")
+  //       setConPassword("")
+  //     //  const msg =   alert("registered")
+  //     //  await msg
+  //       // props.navigation.navigate("Login")
+  //       // fetch(`${baseUrl}/user/register`, {
+  //     //   method: "POST",
+  //     //   headers: {
+  //     //     "Content-Type": "application/json",
+  //     //   },
+  //     //   body: JSON.stringify({
+  //     //     fullName: username,
+  //     //     phoneNumber: contact,
+  //     //     email: email,
+  //     //     password: password,
+  //     //   }),
+  //     // })
+  //     //   .then((res) => res.json())
+  //     //   .then((res) => console.log(res));
+  //   } catch (error) {
+  //     // alert('error',error);
+  //     console.log("error1",error)
+  //     setLoading(false)
+  //     alert('faild')
+  //   }
+  // };
   
-  // const signUpUser = async()=>{
-  //   alert("dilawar")
-  //   const re = await signUpFirebase({userName,email,contact,password})
-  // }
+  const signUpUser = async ()=>{
+    debugger
+
+    try{
+      const re = await signUpFirebase({username,email,contact,password})
+      alert("Register successfully")
+      alert(re)
+    }catch(e){
+      switch (e.message) {
+        case "Firebase: Password should be at least 6 characters (auth/weak-password).":
+          alert("Password at least 6")
+        break;
+        case "Firebase: Error (auth/invalid-email).":
+        alert("invalid-email")
+        break;
+        case "Firebase: Error (auth/email-already-in-use).":
+        alert("user already exist")          
+        break;
+        default:
+        alert("Unknown Error Occured")
+    }
+  }
+}
   
   
   return (
